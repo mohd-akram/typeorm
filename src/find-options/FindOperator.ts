@@ -72,23 +72,15 @@ export class FindOperator<T> {
 
     /**
      * Indicates if parameter is used or not for this operator.
-     * Extracts final value if value is another find operator.
      */
     get useParameter(): boolean {
-        if (InstanceChecker.isFindOperator(this._value))
-            return this._value.useParameter
-
         return this._useParameter
     }
 
     /**
      * Indicates if multiple parameters must be used for this operator.
-     * Extracts final value if value is another find operator.
      */
     get multipleParameters(): boolean {
-        if (InstanceChecker.isFindOperator(this._value))
-            return this._value.multipleParameters
-
         return this._multipleParameters
     }
 
