@@ -85,6 +85,31 @@ describe("repository > find options > operators", () => {
             }),
         ))
 
+    it("lessThan(raw)", () =>
+        Promise.all(
+            connections.map(async (connection) => {
+                // insert some fake data
+                const post1 = new Post()
+                post1.title = "About #1"
+                post1.likes = 12
+                await connection.manager.save(post1)
+                const post2 = new Post()
+                post2.title = "About #2"
+                post2.likes = 3
+                await connection.manager.save(post2)
+
+                // check operator
+                const loadedPosts = await connection
+                    .getRepository(Post)
+                    .findBy({
+                        likes: LessThan(Raw('10')),
+                    })
+                loadedPosts.should.be.eql([
+                    { id: 2, likes: 3, title: "About #2" },
+                ])
+            }),
+        ))
+
     it("lessThanOrEqual", () =>
         Promise.all(
             connections.map(async (connection) => {
