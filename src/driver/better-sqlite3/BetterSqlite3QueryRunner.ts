@@ -92,7 +92,7 @@ export class BetterSqlite3QueryRunner extends AbstractSqliteQueryRunner {
             const result = new QueryResult()
 
             if (stmt.reader) {
-                const raw = stmt.all.apply(stmt, parameters)
+                const raw = await stmt.all.apply(stmt, parameters)
 
                 result.raw = raw
 
@@ -100,7 +100,7 @@ export class BetterSqlite3QueryRunner extends AbstractSqliteQueryRunner {
                     result.records = raw
                 }
             } else {
-                const raw = stmt.run.apply(stmt, parameters)
+                const raw = await stmt.run.apply(stmt, parameters)
                 result.affected = raw.changes
                 result.raw = raw.lastInsertRowid
             }

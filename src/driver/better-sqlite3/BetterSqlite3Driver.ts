@@ -138,7 +138,7 @@ export class BetterSqlite3Driver extends AbstractSqliteDriver {
             nativeBinding = null,
             prepareDatabase,
         } = this.options
-        const databaseConnection = this.sqlite(database, {
+        const databaseConnection = new this.sqlite(database, {
             readonly,
             fileMustExist,
             timeout,
